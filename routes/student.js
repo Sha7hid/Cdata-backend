@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const {Blog} = require('../models/blog');
+const {Student} = require('../models/student');
 
-// Get All Blogs
-router.get('/blogs', (req, res)=> {
-    Blog.find({}, (err, data)=> {
+// Get All Students
+router.get('/', (req, res)=> {
+    Student.find({}, (err, data)=> {
         if (!err) {
             res.send(data);
         } else {
@@ -14,18 +14,18 @@ router.get('/blogs', (req, res)=> {
         }
     })
 });
-// Save Blog 
-router.post('/blog/add', (req,res) => {
-    const blo = new Blog({
-        heading: req.body.heading,
-        date: req.body.date,
-        content: req.body.content,
+// Save student
+router.post('/add', (req,res) => {
+    const stu = new Student({
+        name: req.body.name,
+        age: req.body.age,
+        course: req.body.course,
         image: req.body.image
     });
-    blo.save((err, data) => {
+    stu.save((err, data) => {
         if (!err) {
-            res.status(200).json({code:200, message:'Blog Added Successfully',
-        addEmployee:data})
+            res.status(200).json({code:200, message:'Student Added Successfully',
+        addStudent:data})
         } else {
             console.log(err);
         }
@@ -33,9 +33,9 @@ router.post('/blog/add', (req,res) => {
     })
 });
 
-// GEt Single Blog
-router.get('/blog/:id', (req, res) => {
-    Blog.findById(req.params.id,(err, data)=>{
+// GEt Single student
+router.get('/student/:id', (req, res) => {
+    Student.findById(req.params.id,(err, data)=>{
         if (!err) {
             res.send(data);
         } else {
@@ -43,29 +43,29 @@ router.get('/blog/:id', (req, res) => {
         }
     })
 });
-// Update Blog
-router.put('/blog/edit/:id',(req, res)=>{
-const blo = {
-    heading: req.body.heading,
-    date: req.body.date,
-    content: req.body.content,
+// Update Student
+router.put('/student/edit/:id',(req, res)=>{
+const stu = {
+    name: req.body.name,
+    age: req.body.age,
+    course: req.body.course,
     image: req.body.image
 };
-Blog.findByIdAndUpdate(req.params.id, {$set:blo}, {new:true}, (err, data)=> {
+Student.findByIdAndUpdate(req.params.id, {$set:stu}, {new:true}, (err, data)=> {
     if (!err) {
-        res.status(200).json({code:200, message:'Blog Updated Successfully ',
-    updateBlog:data })
+        res.status(200).json({code:200, message:'Student Updated Successfully ',
+    updateStudent:data })
     } else {
      console.log(err);   
     }
 })
 });
-// Delete Blog
-router.delete('/blog/:id', (req, res)=>{
-    Blog.findByIdAndDelete(req.params.id, (err, data)=>{
+// Delete Student
+router.delete('/student/:id', (req, res)=>{
+    Student.findByIdAndDelete(req.params.id, (err, data)=>{
         if (!err) {
-            res.status(200).json({code:200, message:'Blog Deleted Successfully',
-        deleteBlog: data});
+            res.status(200).json({code:200, message:'Student Deleted Successfully',
+        deleteStudent: data});
         } else {
             console.log(err);
         }
