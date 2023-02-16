@@ -16,4 +16,5 @@ console.log({port});
 // Routes
 app.use('/api/students', require('./routes/student'));
 app.use('/api/teachers', require('./routes/teacher'));
+app.use('/api/announcements', require('./routes/announcements'));
 app.listen(port);
