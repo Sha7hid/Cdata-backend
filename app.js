@@ -16,7 +16,7 @@ createAgent({
   // Create your Mongoose datasource
   .addDataSource(createMongooseDataSource(connection))
   // Replace "myExpressApp" by your Express application
-  .mountOnExpress(myExpressApp)
+  .mountOnExpress(`https://cdata-backend-production-b82b.up.railway.app/`)
   .start();
 const express = require('express');
 const bodyParser = require('body-parser');
