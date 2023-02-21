@@ -1,3 +1,23 @@
+require('dotenv').config();
+
+const { createAgent } = require('@forestadmin/agent');
+const { createMongooseDataSource } = require('@forestadmin/datasource-mongoose');
+// Retrieve your mongoose connection
+const connection = require('./mongoose-models');
+
+// Create your Forest Admin agent
+// This must be called BEFORE all other middleware on the app
+createAgent({
+  authSecret: process.env.FOREST_AUTH_SECRET,
+  envSecret: process.env.FOREST_ENV_SECRET,
+  isProduction: process.env.NODE_ENV === 'production',
+  
+})
+  // Create your Mongoose datasource
+  .addDataSource(createMongooseDataSource(connection))
+  // Replace "myExpressApp" by your Express application
+  .mount('https://cdata-backend-production-b82b.up.railway.app')
+  .start();
 const express = require('express');
 const bodyParser = require('body-parser');
 
