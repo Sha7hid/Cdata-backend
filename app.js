@@ -3,7 +3,7 @@ require('dotenv').config();
 const { createAgent } = require('@forestadmin/agent');
 const { createMongooseDataSource } = require('@forestadmin/datasource-mongoose');
 // Retrieve your mongoose connection
-const connection = require('./mongoose-models');
+const connection = require('./config/db');
 
 // Create your Forest Admin agent
 // This must be called BEFORE all other middleware on the app
