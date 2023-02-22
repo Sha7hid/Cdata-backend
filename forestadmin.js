@@ -14,6 +14,10 @@ ForestAdmin.init({
   envSecret: process.env.FOREST_ENV_SECRET,
   authSecret: process.env.FOREST_AUTH_SECRET,
   mongoose,
+  objectMapping: [{
+    model: 'Student',
+    collection: 'students'
+  }],
   expressApp: app,
   sequelize: null,
   models,
